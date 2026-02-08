@@ -21,14 +21,18 @@ body {
   width: 100%;
   min-height: 100%;
   overflow-x: hidden;
-  overflow-y: auto; /* permite rolagem vertical */
+  overflow-y: auto;
 }
 
 body {
   position: relative;
   font-family: "Inter", sans-serif;
   color: var(--text-color);
-  background-color: #000; /* fundo caso a imagem não preencha totalmente */
+  background-color: #000;
+  display: flex;
+  justify-content: center; /* centraliza horizontalmente */
+  align-items: flex-start;
+  padding: 32px 0;         /* espaço superior e inferior */
 }
 
 /* ===== IMAGEM DE FUNDO ===== */
@@ -36,40 +40,44 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-
-  display: block;       /* essencial para mobile */
-  width: 100%;          /* cobre toda largura */
-  height: auto;         /* mantém proporção */
-  min-height: 100vh;    /* cobre toda altura mínima */
+  display: block;
+  width: 100%;
+  height: auto;
+  min-height: 100vh;
   max-width: none;
-
-  object-fit: contain;  /* mantém a imagem inteira sem cortar */
-  z-index: -1;          /* atrás de todo conteúdo */
+  object-fit: contain;
+  z-index: -1;
 }
 
 /* ===== CONTAINER ===== */
 #container {
   width: 100%;
-  max-width: 360px;
-  margin: 0 auto;
-  padding: 24px 16px 48px;
+  max-width: 588px;
+  padding: 24px 16px;             /* padding interno */
+  border: 1px solid var(--stroke-color); /* Borda envolvendo o container */
+  border-radius: 16px;                   /* Cantos arredondados */
+  display: flex;
+  flex-direction: column;
+  gap: 16px;                            /* espaço interno entre seções */
+  backdrop-filter: blur(4px);           /* efeito vidro leve */
+  background: var(--surface-color);
 }
 
 /* ===== PROFILE ===== */
 #profile {
   text-align: center;
-  padding: 16px;
+  padding: 16px 0;
 }
 
 #profile img {
-  width: 80px;
+  width: 112px;
 }
 
 #profile p {
+  font-size: 16px;
   font-weight: 500;
   line-height: 20px;
   margin-top: 8px;
-  font-size: 14px;
 }
 
 /* ===== SWITCH ===== */
@@ -117,10 +125,11 @@ ul {
 }
 
 ul li a {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 14px 16px;
+  padding: 14px 16px;          /* mantém texto centralizado */
   background: var(--surface-color);
   border: 1px solid var(--stroke-color);
   border-radius: 8px;
@@ -129,6 +138,13 @@ ul li a {
   font-weight: 500;
   font-size: 15px;
   color: var(--text-color);
+  transition: all 0.2s ease;
+}
+
+ul li a ion-icon {
+  position: absolute;
+  left: 16px;                  /* ícone fixo à esquerda */
+  font-size: 20px;
 }
 
 ul li a:hover {
@@ -161,29 +177,6 @@ footer {
   font-size: 12px;
 }
 
-/* ===== DESKTOP ===== */
-@media (min-width: 768px) {
-  .bg-img {
-    content: url(./assets/bg-desktop.jpg);
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* desktop pode preencher totalmente e cortar se necessário */
-  }
-
-  #container {
-    max-width: 588px;
-    padding: 32px 24px;
-  }
-
-  #profile img {
-    width: 112px;
-  }
-
-  #profile p {
-    font-size: 16px;
-  }
-}
-
 /* ===== ANIMAÇÕES ===== */
 @keyframes slide-in {
   from { left: 0; }
@@ -193,4 +186,25 @@ footer {
 @keyframes slide-back {
   from { left: 50%; }
   to { left: 0; }
+}
+
+/* ===== RESPONSIVO MOBILE ===== */
+@media screen and (max-width: 480px) {
+  #container {
+    width: 90%;          /* deixa espaço nas laterais */
+    padding: 16px 12px;  /* padding interno menor */
+  }
+
+  #profile img {
+    width: 80px;         /* imagem menor no mobile */
+  }
+
+  ul li a {
+    font-size: 14px;     /* texto menor */
+    padding: 12px 12px;
+  }
+
+  ul li a ion-icon {
+    font-size: 18px;     /* ícone menor */
+  }
 }
