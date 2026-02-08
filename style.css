@@ -17,12 +17,18 @@
 
 html,
 body {
-  min-height: 100%;
+  width: 100%;
+  min-height: 100vh;
   overflow-x: hidden;
 }
 
 body {
-  background: var(--bg-url) no-repeat top center / cover;
+  min-height: 100vh;
+  background-image: var(--bg-url);
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: contain; /* NÃO CORTA NO MOBILE */
+  background-color: #000; /* evita espaço branco */
   font-family: "Inter", sans-serif;
   color: var(--text-color);
 }
@@ -149,6 +155,10 @@ footer {
 @media (min-width: 768px) {
   :root {
     --bg-url: url(./assets/bg-desktop.jpg);
+  }
+
+  body {
+    background-size: cover; /* desktop pode cortar */
   }
 
   #container {
