@@ -16,66 +16,58 @@
 }
 
 /* ===== BASE ===== */
-html,
-body {
+html, body {
   width: 100%;
-  min-height: 100%;
-  overflow-x: hidden;
-  overflow-y: auto;
-}
-
-body {
-  position: relative;
+  height: 100%;
+  overflow: hidden;             /* remove rolagem */
   font-family: "Inter", sans-serif;
+  background-color: #000;       /* fundo sólido */
   color: var(--text-color);
-  background-color: #000; /* fundo sólido */
   display: flex;
-  justify-content: center; /* centraliza horizontalmente */
-  align-items: flex-start;
-  padding: 32px 0;         /* espaço superior e inferior */
+  justify-content: center;
+  align-items: center;          /* centraliza vertical e horizontal */
 }
 
 /* ===== CONTAINER ===== */
 #container {
-  width: 100%;
-  max-width: 588px;
-  padding: 24px 16px;             /* padding interno */
-  border: 1px solid var(--stroke-color); /* Borda envolvendo o container */
-  border-radius: 16px;                   /* Cantos arredondados */
+  width: 90%;
+  max-width: 360px;             /* menor que antes */
+  padding: 16px;
+  border: 1px solid var(--stroke-color);
+  border-radius: 16px;
   display: flex;
   flex-direction: column;
-  gap: 16px;                            /* espaço interno entre seções */
-  backdrop-filter: blur(4px);           /* efeito vidro leve */
-  background: var(--surface-color);     /* fundo do container */
+  gap: 12px;
+  backdrop-filter: blur(4px);
+  background: var(--surface-color);
 }
 
 /* ===== PROFILE ===== */
 #profile {
   text-align: center;
-  padding: 16px 0;
 }
 
 #profile img {
-  width: 112px;
+  width: 70px;
 }
 
 #profile p {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 500;
-  line-height: 20px;
-  margin-top: 8px;
+  line-height: 18px;
+  margin-top: 4px;
 }
 
 /* ===== SWITCH ===== */
 #switch {
   position: relative;
-  width: 64px;
-  margin: 12px auto;
+  width: 48px;
+  margin: 8px auto;
 }
 
 #switch button {
-  width: 32px;
-  height: 32px;
+  width: 24px;
+  height: 24px;
   background: white var(--switch-bg-url) no-repeat center;
   border: 0;
   border-radius: 50%;
@@ -84,17 +76,12 @@ body {
   left: 0;
   transform: translateY(-50%);
   z-index: 1;
-  animation: slide-back 0.2s;
-}
-
-.light #switch button {
-  animation: slide-in 0.2s forwards;
 }
 
 #switch span {
   display: block;
-  width: 64px;
-  height: 24px;
+  width: 48px;
+  height: 18px;
   background: var(--surface-color);
   border: 1px solid var(--stroke-color);
   backdrop-filter: blur(4px);
@@ -106,8 +93,7 @@ ul {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  padding: 16px 0;
+  gap: 8px;
 }
 
 ul li a {
@@ -115,22 +101,28 @@ ul li a {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 14px 16px;          /* mantém texto centralizado */
+  padding: 8px 12px;
   background: var(--surface-color);
   border: 1px solid var(--stroke-color);
   border-radius: 8px;
-  backdrop-filter: blur(4px);
   text-decoration: none;
   font-weight: 500;
-  font-size: 15px;
+  font-size: 13px;
   color: var(--text-color);
   transition: all 0.2s ease;
 }
 
+ul li a:focus,
+ul li a:active {
+  outline: none;
+  background: var(--surface-color);
+  border-color: var(--stroke-color);
+}
+
 ul li a ion-icon {
   position: absolute;
-  left: 16px;                  /* ícone fixo à esquerda */
-  font-size: 20px;
+  left: 8px;
+  font-size: 16px;
 }
 
 ul li a:hover {
@@ -142,12 +134,12 @@ ul li a:hover {
 #social-links {
   display: flex;
   justify-content: center;
-  padding: 16px 0;
-  font-size: 22px;
+  padding: 8px 0;
+  font-size: 18px;
 }
 
 #social-links a {
-  padding: 12px;
+  padding: 8px;
   border-radius: 50%;
   color: var(--text-color);
 }
@@ -158,7 +150,7 @@ ul li a:hover {
 
 /* ===== FOOTER ===== */
 footer {
-  padding: 16px 0 32px;
+  padding: 8px 0;
   text-align: center;
   font-size: 12px;
 }
@@ -177,20 +169,40 @@ footer {
 /* ===== RESPONSIVO MOBILE ===== */
 @media screen and (max-width: 480px) {
   #container {
-    width: 90%;          /* deixa espaço nas laterais */
-    padding: 16px 12px;  /* padding interno menor */
+    max-width: 320px;
+    padding: 12px;
+    gap: 8px;
   }
 
   #profile img {
-    width: 90px;         /* imagem menor no mobile */
+    width: 60px;
   }
 
   ul li a {
-    font-size: 14px;     /* texto menor */
-    padding: 12px 12px;
+    font-size: 12px;
+    padding: 6px 10px;
   }
 
   ul li a ion-icon {
-    font-size: 18px;     /* ícone menor */
+    font-size: 14px;
+    left: 6px;
+  }
+
+  #switch {
+    width: 40px;
+  }
+
+  #switch button {
+    width: 20px;
+    height: 20px;
+  }
+
+  #switch span {
+    width: 40px;
+    height: 16px;
+  }
+
+  #social-links {
+    font-size: 16px;
   }
 }
