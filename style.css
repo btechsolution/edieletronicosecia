@@ -1,13 +1,13 @@
+/* ===== RESET ===== */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  color: var(--text-color);
 }
 
+/* ===== VARIÁVEIS ===== */
 :root {
   --text-color: #f5a770;
-  --bg-url: url(./assets/bg-mobile.jpg);
   --stroke-color: rgb(255, 255, 255);
   --surface-color: rgba(247, 242, 242, 0.065);
   --surface-color-hover: rgba(0, 0, 0, 0.02);
@@ -15,31 +15,47 @@
   --switch-bg-url: url(./assets/moon-stars.svg);
 }
 
+/* ===== BASE ===== */
 html,
 body {
   width: 100%;
-  min-height: 100vh;
+  min-height: 100%;
   overflow-x: hidden;
+  overflow-y: auto; /* permite rolagem vertical */
 }
 
 body {
-  min-height: 100vh;
-  background-image: var(--bg-url);
-  background-repeat: no-repeat;
-  background-position: top center;
-  background-size: contain; /* NÃO CORTA NO MOBILE */
-  background-color: #000; /* evita espaço branco */
+  position: relative;
   font-family: "Inter", sans-serif;
   color: var(--text-color);
+  background-color: #000; /* fundo caso a imagem não preencha totalmente */
 }
 
+/* ===== IMAGEM DE FUNDO ===== */
+.bg-img {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  display: block;       /* essencial para mobile */
+  width: 100%;          /* cobre toda largura */
+  height: auto;         /* mantém proporção */
+  min-height: 100vh;    /* cobre toda altura mínima */
+  max-width: none;
+
+  object-fit: contain;  /* mantém a imagem inteira sem cortar */
+  z-index: -1;          /* atrás de todo conteúdo */
+}
+
+/* ===== CONTAINER ===== */
 #container {
   width: 100%;
   max-width: 360px;
   margin: 0 auto;
-  padding: 24px 16px;
+  padding: 24px 16px 48px;
 }
 
+/* ===== PROFILE ===== */
 #profile {
   text-align: center;
   padding: 16px;
@@ -56,6 +72,7 @@ body {
   font-size: 14px;
 }
 
+/* ===== SWITCH ===== */
 #switch {
   position: relative;
   width: 64px;
@@ -71,17 +88,13 @@ body {
   position: absolute;
   top: 50%;
   left: 0;
-  z-index: 1;
   transform: translateY(-50%);
+  z-index: 1;
   animation: slide-back 0.2s;
 }
 
 .light #switch button {
   animation: slide-in 0.2s forwards;
-}
-
-#switch button:hover {
-  outline: 6px solid var(--highlight-color);
 }
 
 #switch span {
@@ -94,6 +107,7 @@ body {
   border-radius: 999px;
 }
 
+/* ===== LISTA ===== */
 ul {
   list-style: none;
   display: flex;
@@ -113,16 +127,16 @@ ul li a {
   backdrop-filter: blur(4px);
   text-decoration: none;
   font-weight: 500;
-  transition: background 0.2s;
   font-size: 15px;
   color: var(--text-color);
 }
 
 ul li a:hover {
   background: var(--surface-color-hover);
-  border: 1.5px solid var(--text-color);
+  border-color: var(--text-color);
 }
 
+/* ===== SOCIAL ===== */
 #social-links {
   display: flex;
   justify-content: center;
@@ -131,11 +145,7 @@ ul li a:hover {
 }
 
 #social-links a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   padding: 12px;
-  transition: background 0.2s;
   border-radius: 50%;
   color: var(--text-color);
 }
@@ -144,21 +154,20 @@ ul li a:hover {
   background: var(--highlight-color);
 }
 
+/* ===== FOOTER ===== */
 footer {
-  padding: 16px 0;
+  padding: 16px 0 32px;
   text-align: center;
   font-size: 12px;
-  color: var(--text-color);
 }
 
 /* ===== DESKTOP ===== */
 @media (min-width: 768px) {
-  :root {
-    --bg-url: url(./assets/bg-desktop.jpg);
-  }
-
-  body {
-    background-size: cover; /* desktop pode cortar */
+  .bg-img {
+    content: url(./assets/bg-desktop.jpg);
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* desktop pode preencher totalmente e cortar se necessário */
   }
 
   #container {
@@ -173,57 +182,15 @@ footer {
   #profile p {
     font-size: 16px;
   }
-
-  #switch {
-    width: 72px;
-  }
-
-  #switch button {
-    width: 36px;
-    height: 36px;
-  }
-
-  #switch span {
-    width: 72px;
-    height: 28px;
-  }
-
-  ul {
-    gap: 16px;
-    padding: 24px 0;
-  }
-
-  ul li a {
-    padding: 16px 24px;
-    font-size: 16px;
-  }
-
-  #social-links {
-    padding: 24px 0;
-    font-size: 24px;
-  }
-
-  footer {
-    padding: 24px 0;
-    font-size: 14px;
-  }
 }
 
 /* ===== ANIMAÇÕES ===== */
 @keyframes slide-in {
-  from {
-    left: 0;
-  }
-  to {
-    left: 50%;
-  }
+  from { left: 0; }
+  to { left: 50%; }
 }
 
 @keyframes slide-back {
-  from {
-    left: 50%;
-  }
-  to {
-    left: 0;
-  }
+  from { left: 50%; }
+  to { left: 0; }
 }
